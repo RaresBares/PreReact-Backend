@@ -1,0 +1,2 @@
+Path;Time;SensorID;Alias;Type;StdDev;Peak;PeakToPeak;Median;RMS;ShapeFactor;CrestFactor;Raw;FFT;STFTs
+/data/sensor1.csv;2025-02-07;SENSOR_001;MotorVibration;Vibration;0.3311595788538611;(0.5, -0.4);0.9;0.15000000000000002;0.313581462037113;3.762977544445356;1.5944820103582016;[0.1, 0.3, -0.2, 0.5, -0.4, 0.2];[];[]
