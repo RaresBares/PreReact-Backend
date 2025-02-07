@@ -1,3 +1,4 @@
+import json
 import os
 import pandas as pd
 from datetime import date
@@ -6,13 +7,14 @@ from backend.utils.windows import windows
 
 
 class DataSet(Saveable):
+
     def __init__(
             self,
-            dir: str,
-            sensorID: str,
-            alias: str,
-            type: str,
-            raw: list[float],
+            dir: str = None,
+            sensorID: str= "",
+            alias: str= "",
+            type: str= None,
+            raw: list[float]= None,
             fft: list[float] = None,
             stfts: list[tuple[windows, list[float]]] = None,
     ):
@@ -80,24 +82,29 @@ class DataSet(Saveable):
             "FFT": str(self.fft),
             "STFTs": str([(str(w), str(f)) for w, f in self.stfts]),
         }
-
         df = pd.DataFrame([data])
-        df.to_csv(filepath, mode="a", header=not file_exists, index=False, sep=";")
+        df.to_csv(filepath, mode="w", header=True, index=False, sep=";")
         print(f"Verzeichnis existiert: {os.path.exists(dir)}, Pfad: {dir}")
         print(f"DataSet gespeichert unter: {filepath}")
 
+    def load(self, path: str) -> None:
+        if not os.path.exists(path):
+            print(f"Datei {path} existiert nicht.")
+            return
 
-# Proof of Concept
-def main():
-    dataset = DataSet(
-        dir="./dirs",
-        sensorID="SENSOR_001",
-        alias="MotorVibration",
-        type="Vibration",
-        raw=[0.1, 0.3, -0.2, 0.5, -0.4, 0.2],
-    )
-    dataset.save("./dirs")
+        df = pd.read_csv(path, sep=";")
+
+        for _, row in df.iterrows():
+            self.dir=os.path.dirname(path)
+            self.sensorID=row["SensorID"]
+            self.alias= row["Alias"]
+            self.type=row["Type"]
+            self.raw=json.loads(row["Raw"])
+            self.fft=json.loads(row["FFT"])
+            self.stfts=[(w, f) for w, f in json.loads(row["STFTs"])]
 
 
-if __name__ == "__main__":
-    main()
+
+
+
+

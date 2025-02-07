@@ -2,8 +2,9 @@ import os
 import pandas as pd
 import json
 from datetime import date
-from ..utils.saveable import Saveable
-from .Dataset import DataSet  # Falls dataset.py im gleichen Ordner liegt
+from backend.utils.saveable import Saveable
+from Dataset import DataSet  # Falls dataset.py im gleichen Ordner liegt
+
 
 class DeviceData(Saveable):
     sensors: list[DataSet] = []
@@ -15,3 +16,12 @@ class DeviceData(Saveable):
         for sensor in self.sensors:
             sensor.save(filepath)
         print(f"Alle Sensoren gespeichert in: {filepath}")
+
+
+if __name__ == "__main__":
+    dataset = DataSet("./dat/SENSOR_001_meas.csv")
+    dataset.load("./dat/SENSOR_001_meas.csv")
+    dataset.alias = dataset.alias + "test"
+    dataset.save("./dat")
+    print("Test: " + dataset.alias)
+
