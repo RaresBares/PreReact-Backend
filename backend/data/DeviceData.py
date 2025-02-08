@@ -23,6 +23,7 @@ if __name__ == "__main__":
     dataset.load("./dat/SENSOR_001_meas.csv")
     dataset.raw = [1, 0, 1, 0, 1, 0]
     dataset.calculate_fft()
+    dataset.calculate_stft()
     dataset.alias = dataset.alias + "test"
     dataset.save("./dat")
     print("Test: " + str([round(x.real, 2) + round(x.imag, 2) * 1j for x in dataset.fft]))

@@ -69,6 +69,9 @@ class DataSet(Saveable):
     def calculate_stft(self):
         self.stfts = [(w, np.abs(np.fft.fft([w.func(x, 0) for x in self.raw])).tolist()) for w in windows]
 
+    def update_stft(self):
+        self.stfts = [(w, np.abs(np.fft.fft([w.func(x, 0) for x in self.raw])).tolist()) for w in windows]
+
 
     def save(self, dir: str) -> None:
         filepath = os.path.join(dir, f"{self.sensorID}_meas.csv")  # Richtiger Pfadaufbau
