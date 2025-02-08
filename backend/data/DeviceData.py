@@ -21,7 +21,8 @@ class DeviceData(Saveable):
 if __name__ == "__main__":
     dataset = DataSet("./dat/SENSOR_001_meas.csv")
     dataset.load("./dat/SENSOR_001_meas.csv")
+    dataset.raw = [1, 0, 1, 0, 1, 0]
+    dataset.calculate_fft()
     dataset.alias = dataset.alias + "test"
     dataset.save("./dat")
-    print("Test: " + dataset.alias)
-
+    print("Test: " + str([round(x.real, 2) + round(x.imag, 2) * 1j for x in dataset.fft]))

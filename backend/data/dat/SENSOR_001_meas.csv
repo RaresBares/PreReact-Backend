@@ -1,2 +1,0 @@
-Path;Time;SensorID;Alias;Type;StdDev;Peak;PeakToPeak;Median;RMS;ShapeFactor;CrestFactor;Raw;FFT;STFTs
-./dat\SENSOR_001_meas.csv;2025-02-08;SENSOR_001;MotorVibrationtest;Vibration;;None;;;;;;[0.1, 0.3, -0.2, 0.5, -0.4, 0.2];[];[]

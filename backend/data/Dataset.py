@@ -2,9 +2,12 @@ import json
 import os
 import pandas as pd
 from datetime import date
+
+from backend.utils.ComplexArrayHandler import ComplexArrayHandler
 from backend.utils.saveable import Saveable
 from backend.utils.windows import windows
-
+import numpy as np
+import ast
 
 class DataSet(Saveable):
 
@@ -24,6 +27,7 @@ class DataSet(Saveable):
         self.alias = alias
         self.type = type
         self.raw = raw
+        self.fft = fft if fft else []
         self.fft = fft if fft else []
         self.stfts = stfts if stfts else []
         self.path = dir + "/" + sensorID + "_" + "meas" + ".csv"
@@ -57,6 +61,15 @@ class DataSet(Saveable):
     def calculate_crest_factor(self):
         return max(self.raw) / self.rms if self.raw else None
 
+    def calculate_fft(self):
+        if self.raw:
+            fft_result = np.fft.fft(self.raw)
+            self.fft = ComplexArrayHandler(fft_result)
+
+    def calculate_stft(self):
+        self.stfts = [(w, np.abs(np.fft.fft([w.func(x, 0) for x in self.raw])).tolist()) for w in windows]
+
+
     def save(self, dir: str) -> None:
         filepath = os.path.join(dir, f"{self.sensorID}_meas.csv")  # Richtiger Pfadaufbau
         os.makedirs(dir, exist_ok=True)  # Erstellt das Verzeichnis korrekt
@@ -78,7 +91,7 @@ class DataSet(Saveable):
             "RMS": self.rms,
             "ShapeFactor": self.shape_factor,
             "CrestFactor": self.crest_factor,
-            "Raw": str(self.raw),
+            "RAW": str(self.raw),
             "FFT": str(self.fft),
             "STFTs": str([(str(w), str(f)) for w, f in self.stfts]),
         }
@@ -99,8 +112,8 @@ class DataSet(Saveable):
             self.sensorID=row["SensorID"]
             self.alias= row["Alias"]
             self.type=row["Type"]
-            self.raw=json.loads(row["Raw"])
-            self.fft=json.loads(row["FFT"])
+            self.raw=np.array(ast.literal_eval(row["RAW"]));
+            self.fft = ComplexArrayHandler(np.array(ast.literal_eval(row["FFT"])));
             self.stfts=[(w, f) for w, f in json.loads(row["STFTs"])]
 
 
