@@ -2,15 +2,34 @@ import os
 import pandas as pd
 import json
 from datetime import date
+
+import yaml as yaml
+
 from backend.utils.saveable import Saveable
 from Dataset import DataSet  # Falls dataset.py im gleichen Ordner liegt
+
+
+def loadFromDirectonary(dir):
+    with open(os.path.join(dir, "map.yaml"), 'r') as f:
+        map = yaml.load(f, Loader=yaml.FullLoader)
+        for sens in map["sensors"]:
+            sensorInfo = map["sensors"][sens]
+            sensor = DataSet(sensorInfo["sensorID"], dir)
 
 
 class DeviceData(Saveable):
     sensors: list[DataSet] = []
 
-    def __init__(self, sensors: list[DataSet] = None):
+    def __init__(self, sensors: list[DataSet] = None, dir : str = None):
         self.sensors = sensors if sensors else []
+
+        if(not sensors and os.path.exists(dir)):
+            loadFromDirectonary(dir)
+        else:
+            print("Error! Directory doesn't exist!")
+
+
+
 
     def save(self, filepath: str) -> None:
         for sensor in self.sensors:

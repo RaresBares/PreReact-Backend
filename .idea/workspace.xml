@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Numpy integration">
-      <change afterPath="$PROJECT_DIR$/backend/utils/STFT.py" afterDir="false" />
+    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Added: STFT class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/data/Dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/Dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/DeviceData.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/DeviceData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/filesystem/Filesystem.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/filesystem/Filesystem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/filesystem/elements/Features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Method.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/filesystem/elements/Method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modelmanager/ModelManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/ModelManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/AIModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/AIModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/AlgoModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/AlgoModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/Opinion.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/Opinion.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +193,7 @@
       <workItem from="1738943275921" duration="8053000" />
       <workItem from="1738962780075" duration="7408000" />
       <workItem from="1738975117042" duration="2734000" />
-      <workItem from="1739003720160" duration="2268000" />
+      <workItem from="1739003720160" duration="6060000" />
     </task>
     <task id="LOCAL-00001" summary="Added: DataSet, Saveable, SensorTypes">
       <option name="closed" value="true" />
@@ -221,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738977868406</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added: STFT class">
+      <option name="closed" value="true" />
+      <created>1739006213013</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739006213013</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +244,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added: DataSet, Saveable, SensorTypes" />
     <MESSAGE value="Edited: Numpy integration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited: Numpy integration" />
+    <MESSAGE value="Added: STFT class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added: STFT class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -249,7 +264,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PreReact_Backend$DeviceData.coverage" NAME="DeviceData Coverage Results" MODIFIED="1739005671470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/data" />
+    <SUITE FILE_PATH="coverage/PreReact_Backend$DeviceData.coverage" NAME="DeviceData Coverage Results" MODIFIED="1739012069628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/data" />
     <SUITE FILE_PATH="coverage/PreReact_Backend$Dataset.coverage" NAME="Dataset Coverage Results" MODIFIED="1738971114474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/data" />
   </component>
 </project>
