@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Added: STFT class">
+    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Numpy integration">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/generics/.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/modelmanager/Evaluable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PreReact-Backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PreReact-Backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/Dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/Dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/DeviceData.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/DeviceData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/filesystem/Filesystem.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/filesystem/Filesystem.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/filesystem/elements/Features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Method.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/filesystem/elements/Method.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/modelmanager/ModelManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/ModelManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/AIModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/AIModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/AlgoModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/AlgoModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/Model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/modelmanager/models/Opinion.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modelmanager/models/Opinion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/filesystem/Filesystem.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/Features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Method.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/Method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/utils/SensorType.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/SensorType.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,17 +74,23 @@
     &quot;Python.subscript_std_deviation.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rares/PycharmProjects/PreReact-Backend/backend/src&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\data\dat" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\generics" />
       <recent name="C:\Users\rares\PycharmProjects\PreReact-Backend\backend" />
     </key>
   </component>
@@ -139,7 +152,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -156,17 +168,15 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="HTTP Request.fff | GET request to example server" />
-      <item itemvalue="Python.FileSystem" />
       <item itemvalue="Python.Dataset" />
       <item itemvalue="Python.DeviceData" />
       <item itemvalue="Python.subscript_std_deviation" />
+      <item itemvalue="Python.FileSystem" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.DeviceData" />
         <item itemvalue="Python.Dataset" />
-        <item itemvalue="HTTP Request.fff | GET request to example server" />
         <item itemvalue="Python.subscript_std_deviation" />
       </list>
     </recent_temporary>
@@ -193,7 +203,7 @@
       <workItem from="1738943275921" duration="8053000" />
       <workItem from="1738962780075" duration="7408000" />
       <workItem from="1738975117042" duration="2734000" />
-      <workItem from="1739003720160" duration="6060000" />
+      <workItem from="1739003720160" duration="2268000" />
     </task>
     <task id="LOCAL-00001" summary="Added: DataSet, Saveable, SensorTypes">
       <option name="closed" value="true" />
@@ -227,15 +237,7 @@
       <option name="project" value="LOCAL" />
       <updated>1738977868406</updated>
     </task>
-    <task id="LOCAL-00005" summary="Added: STFT class">
-      <option name="closed" value="true" />
-      <created>1739006213013</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1739006213013</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,8 +246,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added: DataSet, Saveable, SensorTypes" />
     <MESSAGE value="Edited: Numpy integration" />
-    <MESSAGE value="Added: STFT class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added: STFT class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited: Numpy integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -264,7 +265,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PreReact_Backend$DeviceData.coverage" NAME="DeviceData Coverage Results" MODIFIED="1739012069628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/data" />
+    <SUITE FILE_PATH="coverage/PreReact_Backend$DeviceData.coverage" NAME="DeviceData Coverage Results" MODIFIED="1739005671470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/data" />
     <SUITE FILE_PATH="coverage/PreReact_Backend$Dataset.coverage" NAME="Dataset Coverage Results" MODIFIED="1738971114474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/data" />
   </component>
 </project>

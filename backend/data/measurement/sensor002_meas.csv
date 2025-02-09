@@ -1,0 +1,2 @@
+Path;Date;Time;TimeStamp;SensorID;Alias;Type;StdDev;Peak;PeakToPeak;Median;RMS;ShapeFactor;CrestFactor;RAW;FFT;STFTs
+./measurement\sensor002_meas.csv;2025-02-08;2025-02-08;2025-02-08;sensor002;Second;MICROPHONE;;(1, 0);1;;0.7071067811865476;;;[1, 0, 1, 0, 1, 0];[(3+0j), (1.1102230246251565e-16+0j), 0j, (3+0j), 0j, 0j];[('windows.Window1', '[(3+0j), (1.1102230246251565e-16+0j), 0j, (3+0j), 0j, 0j]'), ('windows.FUNCTION_B', '[(2+4j), 0j, 0j, 0j, 0j, 0j]')]

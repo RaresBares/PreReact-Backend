@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import date
 
 from backend.utils.ComplexArrayHandler import ComplexArrayHandler
+from backend.utils.SensorType import Sensortype
 from backend.utils.saveable import Saveable
 from backend.utils.windows import windows
 import numpy as np
@@ -16,7 +17,7 @@ class DataSet(Saveable):
             dir: str = None,
             sensorID: str= "",
             alias: str= "",
-            type: str= None,
+            sensortype: Sensortype= None,
             raw: list[float]= None,
             fft: list[float] = None,
             stfts: list[tuple[windows, list[float]]] = None,
@@ -25,10 +26,10 @@ class DataSet(Saveable):
         self.time = date.today()
         self.sensorID = sensorID
         self.alias = alias
-        self.type = type
-        self.raw = raw
+        self.type = sensortype
+        self.raw = np.array(raw)
         self.fft = fft if fft else []
-        self.fft = fft if fft else []
+        self.fft = np.array(fft) if fft else []
         self.stfts = stfts if stfts else []
         self.path = dir + "/" + sensorID + "_" + "meas" + ".csv"
         # Statistik berechnen
@@ -39,6 +40,14 @@ class DataSet(Saveable):
         self.rms = self.calculate_rms()
         self.shape_factor = self.calculate_shape_factor()
         self.crest_factor = self.calculate_crest_factor()
+
+    def __str__(self):
+        return f"[ID: {self.sensorID}]"
+
+    def isType(self, type : Sensortype):
+        if self.type == type:
+            return True;
+        return False;
 
     def calculate_std_dev(self):
         return pd.Series(self.raw).std() if self.raw else None
@@ -72,6 +81,10 @@ class DataSet(Saveable):
     def update_stft(self):
         self.stfts = [(w, np.abs(np.fft.fft([w.func(x, 0) for x in self.raw])).tolist()) for w in windows]
 
+    def update_scalars(self):
+        self.rms = self.calculate_rms();
+        self.peak = self.calculate_peak()
+        self.peak_to_peak = self.calculate_peak_to_peak()
 
     def save(self, dir: str) -> None:
         filepath = os.path.join(dir, f"{self.sensorID}_meas.csv")  # Richtiger Pfadaufbau
@@ -83,10 +96,12 @@ class DataSet(Saveable):
 
         data = {
             "Path": filepath,
+            "Date": self.time.isoformat(),
             "Time": self.time.isoformat(),
+            "TimeStamp": self.time.isoformat(),
             "SensorID": self.sensorID,
             "Alias": self.alias,
-            "Type": self.type,
+            "Type": self.type.name,
             "StdDev": self.std_dev,
             "Peak": str(self.peak),
             "PeakToPeak": self.peak_to_peak,
@@ -94,7 +109,7 @@ class DataSet(Saveable):
             "RMS": self.rms,
             "ShapeFactor": self.shape_factor,
             "CrestFactor": self.crest_factor,
-            "RAW": str(self.raw),
+            "RAW": self.raw,
             "FFT": str(self.fft),
             "STFTs": str([(str(w), str(f)) for w, f in self.stfts]),
         }
@@ -103,7 +118,18 @@ class DataSet(Saveable):
         print(f"Verzeichnis existiert: {os.path.exists(dir)}, Pfad: {dir}")
         print(f"DataSet gespeichert unter: {filepath}")
 
-    def load(self, path: str) -> None:
+    def loadFromFile(dir: str, alias:str = "NoAlias", sensorID : str = None, sensortype: Sensortype | str = None):
+        if isinstance(sensortype, str):
+            sensortype = Sensortype.get_sensortype_by_name(sensortype);
+
+        sensor = DataSet(dir=dir, sensorID=sensorID, sensortype=sensortype);
+        sensor.load(alias=alias, path=os.path.join(dir, sensorID + "_meas.csv"), sensorID=sensorID, sensortype=sensortype);
+        return sensor
+
+    def load(self, alias:str,  path: str = "", sensorID : str = None, sensortype:Sensortype|str = None) -> None:
+        if isinstance(sensortype, str):
+            sensortype = Sensortype.get_sensortype_by_name(sensortype);
+
         if not os.path.exists(path):
             print(f"Datei {path} existiert nicht.")
             return
@@ -112,13 +138,24 @@ class DataSet(Saveable):
 
         for _, row in df.iterrows():
             self.dir=os.path.dirname(path)
-            self.sensorID=row["SensorID"]
-            self.alias= row["Alias"]
-            self.type=row["Type"]
-            self.raw=np.array(ast.literal_eval(row["RAW"]));
-            self.fft = ComplexArrayHandler(np.array(ast.literal_eval(row["FFT"])));
-            self.stfts=[(w, f) for w, f in json.loads(row["STFTs"])]
+            if not sensorID:
+                self.sensorID= row["SensorID"]
+            else:
+                self.sensorID=sensorID
 
+            if alias:
+                self.alias = alias
+            else:
+                self.alias= row["Alias"]
+
+
+            if sensortype:
+                self.type = sensortype;
+            else:
+                Sensortype.get_sensortype_by_name(row["Type"])
+            self.raw= np.array(ast.literal_eval(row["RAW"])).tolist();
+            self.fft = ComplexArrayHandler(np.array(ast.literal_eval(row["FFT"])));
+            self.stfts=[[a, ComplexArrayHandler(ast.literal_eval(s))] for a, s in ast.literal_eval(row["STFTs"])]
 
 
 

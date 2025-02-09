@@ -1,0 +1,21 @@
+measure_date: "1.1.2000"
+measure_time: "16:33"
+measure_timestamp: "123456789"
+sensors:
+- Alias1:
+    alias: "Alias1"
+    description: "testtest"
+    type: "microphone/accelerator"
+    sensorID: 'sensor001'
+    sensor_loc: ""
+    file_location: "./"
+- Alias2:
+    alias: "Alias2"
+    description: "testtest"
+    type: "microphone/accelerator"
+    sensorID: 'sensor002'
+    sensor_loc: ""
+    file_location: "./"
+
+# This is the map file -It contains high level Information about the sensors. most important Data ist sensorID which
+# Gives Information about the location of the File (csv)
