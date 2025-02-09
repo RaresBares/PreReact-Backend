@@ -7,21 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Numpy integration">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/generics/.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/modelmanager/Evaluable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PreReact-Backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PreReact-Backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Working integration of file system">
+      <change afterPath="$PROJECT_DIR$/backend/utils/WeightingFunctions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/console.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/Dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/Dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/DeviceData.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/DeviceData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/filesystem/Filesystem.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/Features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/filesystem/elements/Method.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/Method.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/SensorType.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/SensorType.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/generics/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/scalar_feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/generics/Method.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/vector_feature.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +44,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/RaresBares/PreReact-Backend.git&quot;,
-    &quot;accountId&quot;: &quot;d729f5f0-6764-4deb-8cda-9963988ea899&quot;
+    &quot;accountId&quot;: &quot;b25284c9-bf55-4eda-8504-77b15fc76223&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -63,28 +58,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;HTTP Request.fff | GET request to example server.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.DeviceData.executor&quot;: &quot;Run&quot;,
-    &quot;Python.FileSystem (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.FileSystem.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Python.subscript_std_deviation.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.fff | GET request to example server.executor": "Run",
+    "Python.Dataset.executor": "Run",
+    "Python.DeviceData.executor": "Run",
+    "Python.FileSystem (1).executor": "Run",
+    "Python.FileSystem.executor": "Run",
+    "Python.Unnamed.executor": "Run",
+    "Python.console.executor": "Run",
+    "Python.subscript_std_deviation.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "RainbowCSV.Settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\data\dat" />
@@ -94,7 +92,7 @@
       <recent name="C:\Users\rares\PycharmProjects\PreReact-Backend\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.DeviceData">
+  <component name="RunManager" selected="Python.console">
     <configuration name="fff | GET request to example server" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/models/fff.http" requestIdentifier="GET request to example server" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -144,6 +142,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="console" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PreReact-Backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/console.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="subscript_std_deviation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -168,13 +188,15 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.FileSystem" />
+      <item itemvalue="Python.console" />
       <item itemvalue="Python.Dataset" />
       <item itemvalue="Python.DeviceData" />
       <item itemvalue="Python.subscript_std_deviation" />
-      <item itemvalue="Python.FileSystem" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.console" />
         <item itemvalue="Python.DeviceData" />
         <item itemvalue="Python.Dataset" />
         <item itemvalue="Python.subscript_std_deviation" />
@@ -184,8 +206,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.18034.82" />
-        <option value="bundled-python-sdk-975db3bf15a3-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.18034.82" />
+        <option value="bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177" />
       </set>
     </attachedChunks>
   </component>
@@ -237,7 +258,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738977868406</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Edited: Working integration of file system">
+      <option name="closed" value="true" />
+      <created>1739094888405</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739094888405</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +275,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added: DataSet, Saveable, SensorTypes" />
     <MESSAGE value="Edited: Numpy integration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited: Numpy integration" />
+    <MESSAGE value="Edited: Working integration of file system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited: Working integration of file system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

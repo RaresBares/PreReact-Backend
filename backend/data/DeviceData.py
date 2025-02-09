@@ -2,26 +2,27 @@ import os
 import pandas as pd
 import json
 from datetime import date
-
+from tabulate import tabulate
 import yaml as yaml
 from numpy.ma.core import append
 
+from backend.data.Dataset import DataSet
 from backend.utils.SensorType import Sensortype
 from backend.utils.saveable import Saveable
-from Dataset import DataSet  # Falls dataset.py im gleichen Ordner liegt
 
 # returns array of DataSets of Sensors listed in map.yaml in dir
 def loadSensorsFromYaml(dir):
     file = os.path.join(dir, "map.yaml")
     if os.path.exists(file):
-        with open(file, 'r') as f:
+        with (open(file, 'r') as f):
             map = yaml.load(f, Loader=yaml.FullLoader)
-            sensors : list(DataSet) = [];
+            sensors : list(DataSet) = []
             for i in range(0, len(map["sensors"])):
                 sensorInfo = map["sensors"][i]
-                sensor = DataSet.loadFromFile(os.path.join(dir, sensorInfo[list(sensorInfo.keys())[0]]["file_location"]), sensorID=sensorInfo[list(sensorInfo.keys())[0]]["sensorID"], sensortype=sensorInfo[list(sensorInfo.keys())[0]]["type"],alias=sensorInfo[list(sensorInfo.keys())[0]]["alias"])
+                path = os.path.join(dir, sensorInfo[list(sensorInfo.keys())[0]]["file_location"], sensorInfo[list(sensorInfo.keys())[0]]["sensorid"] + "_meas.csv")
+                sensor = DataSet(path)
+                sensor.loadFromFile( info=sensorInfo[list(sensorInfo.keys())[0]], super_info=map["super_info"])
                 sensors.append(sensor)
-                print(sensor.sensorID)
             return sensors
     else:
         print(f"{file} doesn't exist. Creating it now. ")
@@ -77,8 +78,6 @@ class DeviceData(Saveable):
         self.dir = dir;
         if(not sensors == [] and os.path.exists(dir)):
            self.sensors =  loadSensorsFromYaml(dir)
-           print(f"Wird geladen: {len(self.sensors)}")
-
         else:
             print("Error! Directory doesn't exist!")
 
@@ -90,9 +89,20 @@ class DeviceData(Saveable):
             sensor.save(dir=dir)
         print(f"{len(self.sensors)} sensors saved in: {dir}")
 
+    def introduce(self):
+
+        data = [];
+
+        for sensor in self.sensors:
+            data.append([sensor.alias, sensor.sensorID, sensor.type, sensor.location])
+
+        headers = ["Alias", "SensorID", "SensorType", "Location"]
+
+        print(tabulate(data, headers, tablefmt="grid"))
 
 if __name__ == "__main__":
     device = DeviceData(dir="./measurement")
+    device.introduce()
     i = 0
     for sensor in device.sensors:
         i = i + 1;

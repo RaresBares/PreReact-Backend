@@ -7,14 +7,14 @@ sensors:
     description: "testtest"
     type: "microphone/accelerator"
     sensorID: 'sensor001'
-    sensor_loc: ""
+    sensor_location: ""
     file_location: "./"
 - Alias2:
     alias: "Alias2"
     description: "testtest"
     type: "microphone/accelerator"
     sensorID: 'sensor002'
-    sensor_loc: ""
+    sensor_location: ""
     file_location: "./"
 
 # This is the map file -It contains high level Information about the sensors. most important Data ist sensorID which
