@@ -13,7 +13,7 @@ class SensorConsole(cmd.Cmd):
         self.selected_sensor = None
 
     def do_load(self, arg):
-        """Load sensor data from a YAML file. Syntax: 1 <directory_path>"""
+        """Load sensor data from a YAML file. Syntax: load <directory_path>"""
         if not arg:
             print("Please specify a directory.")
             return
@@ -38,14 +38,14 @@ class SensorConsole(cmd.Cmd):
     def do_introduce(self, arg):
         """Executes DeviceData.introduce() method."""
         if not self.device:
-            print("No device loaded. Use '1 <directory>' first.")
+            print("No device loaded. Use 'load <directory>' first.")
             return
         self.device.introduce()
 
     def do_save(self, arg):
         """Save all sensor data to a directory. Syntax: save <directory>"""
         if not self.device:
-            print("No device loaded. Use '1 <directory>' first.")
+            print("No device loaded. Use 'load <directory>' first.")
             return
 
         if not arg:
@@ -58,26 +58,41 @@ class SensorConsole(cmd.Cmd):
     def do_select(self, arg):
         """Select a sensor by ID. Syntax: select <sensor_id>"""
         if not self.device:
-            print("No device loaded. Use '1 <directory>' first.")
+            print("No device loaded. Use 'load <directory>' first.")
             return
 
         for sensor in self.device.sensors:
             if sensor.sensorID == arg:
                 self.selected_sensor = sensor
-                print(f"Sensor {arg} selected. Use 'getVariable <variable>' or 'getPath'.")
+                print(f"Sensor {arg} selected. Use 'getValue <variable>' or 'getPath'.")
                 return
         print(f"Sensor {arg} not found.")
 
     def do_getValue(self, arg):
-        """Retrieve a variable from the selected sensor. Syntax: getVariable <variable_name>"""
+        """Retrieve a variable from the selected sensor. Syntax: getValue <variable_name>"""
         if not self.selected_sensor:
             print("No sensor selected. Use 'select <sensor_id>' first.")
             return
 
-        if hasattr(self.selected_sensor, arg):
-            print(f"{arg}: {getattr(self.selected_sensor, arg)}")
+        value = self.selected_sensor.get_feature(arg)
+        if value is not None:
+            print(f"{arg}: {value}")
         else:
             print(f"Variable '{arg}' does not exist in the selected sensor.")
+
+    def do_getValues(self, arg):
+        """List all available features and STFTs from the selected sensor. Syntax: getValues"""
+        if not self.selected_sensor:
+            print("No sensor selected. Use 'select <sensor_id>' first.")
+            return
+
+        values = list(self.selected_sensor.features.keys()) + list(self.selected_sensor.stfts.keys())
+        if values:
+            print("Available values:")
+            for value in values:
+                print(f"- {value}")
+        else:
+            print("No values available.")
 
     def do_setValue(self, arg):
         """Set a variable in the selected sensor. Syntax: setValue <variable_name> <value>"""
@@ -91,15 +106,11 @@ class SensorConsole(cmd.Cmd):
             return
 
         variable_name, value = parts
-        if hasattr(self.selected_sensor, variable_name):
-            try:
-                setattr(self.selected_sensor, variable_name, eval(value))
-                print(f"{variable_name} set to {value}.")
-            except Exception as e:
-                print(f"Error setting value: {e}")
-        else:
-            print(f"Variable '{variable_name}' does not exist in the selected sensor.")
-
+        try:
+            self.selected_sensor.features[variable_name] = eval(value)
+            print(f"{variable_name} set to {value}.")
+        except Exception as e:
+            print(f"Error setting value: {e}")
 
 if __name__ == "__main__":
     SensorConsole().cmdloop()
