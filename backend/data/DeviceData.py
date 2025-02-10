@@ -49,27 +49,34 @@ class DeviceData(Saveable):
                 self.sensors[sensor].save(f)
 
     def introduce(self):
-        data = [[sensor.alias, sensor.sensorID, sensor.type] for sensor in self.sensors]
+        data = [[self.sensors[sensor].alias, self.sensors[sensor].sensorid, self.sensors[sensor].sensortype] for sensor in self.sensors]
         headers = ["Alias", "SensorID", "SensorType"]
         print(tabulate(data, headers, tablefmt="grid"))
 
 
-
+'''
 # Erstelle ein Test-Signal mit 1024 Samples, das jede Viertelsekunde die Frequenz ändert
-fs = 120_000  # Abtastrate
-n = 120_000  # Länge des Signals
+fs = 10_000  # Abtastrate
+n = 10_000  # Länge des Signals
 
 t = np.arange(n) / fs
 
 # Vier verschiedene Frequenzen für je 256 Samples
 raw_signal = np.concatenate([
-    np.sin(2 * np.pi * 10 * t[:30000]),
-    np.sin(2 * np.pi * 20 * t[30000:60000]),
-    np.sin(2 * np.pi * 40 * t[60000:90000]),
-    np.sin(2 * np.pi * 80 * t[90000:])
+    np.sin(2 * np.pi * 10 * t[:2500]),
+    np.sin(2 * np.pi * 20 * t[2500:5000]),
+    np.sin(2 * np.pi * 40 * t[5000:7500]),
+    np.sin(2 * np.pi * 80 * t[10_000:])
 ])
 
 device = DeviceData.load_sensors_from_hdf5("./save.h5")
+a = STFT(window_type="blackman", window_size=100, hop_size=10, id="blackman", data=device.sensors["sensor001"].get_feature("Raw"));
+a.compute_stft(device.sensors["sensor001"].get_feature("Raw"))
+device.sensors["sensor001"].stfts.append(a)
+
+
+
 device.save("./save2.h5")
 
 print("Proof of Concept erfolgreich abgeschlossen. STFT-Daten gespeichert.")
+'''

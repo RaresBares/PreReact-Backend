@@ -7,13 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: implementing Dynamic Architecture">
-      <change afterPath="$PROJECT_DIR$/backend/dummy/test.npy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/console.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/DeviceData.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/DeviceData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/sensor_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/sensor_module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/STFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/STFT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/generics/STFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/STFT.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/utils/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/windows.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +30,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="CSV-Try" />
@@ -68,6 +73,7 @@
     "Python.DeviceData.executor": "Run",
     "Python.FileSystem (1).executor": "Run",
     "Python.FileSystem.executor": "Run",
+    "Python.STFT.executor": "Run",
     "Python.Unnamed.executor": "Run",
     "Python.console.executor": "Run",
     "Python.subscript_std_deviation.executor": "Run",
@@ -98,10 +104,7 @@
       <recent name="C:\Users\rares\PycharmProjects\PreReact-Backend\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.DeviceData">
-    <configuration name="fff | GET request to example server" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/models/fff.http" requestIdentifier="GET request to example server" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.console">
     <configuration name="DeviceData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PreReact-Backend" />
       <option name="ENV_FILES" value="" />
@@ -117,6 +120,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/data/DeviceData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="STFT" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PreReact-Backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/generics" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/generics/STFT.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -195,6 +220,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.FileSystem" />
+      <item itemvalue="Python.STFT" />
       <item itemvalue="Python.console" />
       <item itemvalue="Python.sensor_module" />
       <item itemvalue="Python.DeviceData" />
@@ -202,10 +228,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.console" />
+        <item itemvalue="Python.STFT" />
         <item itemvalue="Python.DeviceData" />
         <item itemvalue="Python.subscript_std_deviation" />
         <item itemvalue="Python.sensor_module" />
-        <item itemvalue="Python.console" />
       </list>
     </recent_temporary>
   </component>
@@ -280,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739133560763</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated">
+      <option name="closed" value="true" />
+      <created>1739204677467</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739204677467</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +337,8 @@
     <MESSAGE value="Edited: Numpy integration" />
     <MESSAGE value="Edited: Working integration of file system" />
     <MESSAGE value="Edited: implementing Dynamic Architecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited: implementing Dynamic Architecture" />
+    <MESSAGE value="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
