@@ -132,12 +132,12 @@ cd PreReact-Backend
 
   <h2>Planned / To Do</h2>
   <ul>
-    <li>Enhance window function support with additional types and customization.</li>
-    <li>Improve error handling and logging across modules.</li>
-    <li>Expand the command-line interface with more interactive commands and features.</li>
-    <li>Integrate unit tests and continuous integration.</li>
-    <li>Develop a web-based interface for sensor data visualization.</li>
-    <li>Refine data storage and retrieval to handle larger datasets efficiently.</li>
+    <li>Implementation of evaluation algorithms using static methods</li>
+    <li>Embedding ML/AI into evaluation algorithm</li>
+    <li>Implementation of dataset changing awareness incl. distance measurement of measurements</li>
+    <li>Topological data analysis & holomorphy</li>
+    <li>Web integration using django</li>
+    <li>Parallelization</li>
   </ul>
 
   <h2>Development</h2>
