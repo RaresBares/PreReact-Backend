@@ -23,8 +23,8 @@ class Sensor(Saveable):
         self.description = description
 
         if hdf5 is not None:
-            self.alias = hdf5.attrs["alias"]
-            self.sensortype = Sensortype.get_sensortype_by_name(hdf5.attrs["sensortype"])
+            self.alias = "No Alias" if hdf5.attrs["alias"] == "" else hdf5.attrs["alias"]
+            self.sensortype = "No Type" if Sensortype.get_sensortype_by_name(hdf5.attrs["sensortype"]) == "" else Sensortype.get_sensortype_by_name(hdf5.attrs["sensortype"])
             self.sensorid = hdf5.attrs["sensorid"]
             self.measure_time = hdf5.attrs["measure_time"]
             self.location = hdf5.attrs["location"]
@@ -122,7 +122,7 @@ class Sensor(Saveable):
         sensorgroup.attrs["description"] = self.description or ""
         sensorgroup.attrs["alias"] = self.alias or ""
         sensorgroup.attrs["measure_time"] = self.measure_time or ""
-        sensorgroup.attrs["sensortype"] = self.sensortype or ""
+        sensorgroup.attrs["sensortype"] =  self.sensortype
 
         for featurekey in self.features.keys():
             feature = self.features[featurekey]

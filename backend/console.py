@@ -179,6 +179,23 @@ Example: remove_stft stft_1
         except Exception as e:
             print(f"Error removing STFT: {e}")
 
+    def do_set_type(self, arg):
+        """Remove an STFT from the selected sensor.
+Syntax: remove_stft <stft_id>
+Example: remove_stft stft_1
+        """
+        if not self.selected_sensor:
+            print("No sensor selected. Use 'select <sensor_id>' first.")
+            return
+        if not arg or (arg != "MICROPHONE" and arg != "ACCELERATOR"):
+            print("Usage: set_type <MICROPHONE/ACCELERATOR>")
+            return
+        try:
+            self.selected_sensor.sensortype = arg
+
+        except Exception as e:
+            print(f"Error removing STFT: {e}")
+
     def do_revaluate_all(self, arg):
         """Reevaluate all STFTs for the selected sensor.
 If the RAW feature is available, its values are used for reevaluation.

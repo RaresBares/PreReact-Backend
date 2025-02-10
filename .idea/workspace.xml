@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated">
+    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Finalized H5 and console integration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/console.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/data/DeviceData.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/DeviceData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/sensor_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/sensor_module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/generics/STFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/STFT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/windows.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739204677467</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Finalized H5 and console integration">
+      <option name="closed" value="true" />
+      <created>1739228266437</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739228266437</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +343,8 @@
     <MESSAGE value="Edited: Working integration of file system" />
     <MESSAGE value="Edited: implementing Dynamic Architecture" />
     <MESSAGE value="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited: Nearly Completed HDF5 Integration. STFT working properly, Feature integration working with HDF5 preperly and fully automated calculation of features integrated" />
+    <MESSAGE value="Finalized H5 and console integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalized H5 and console integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
