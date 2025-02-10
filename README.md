@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PreReact-Backend</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-      max-width: 800px;
-    }
-    pre, code {
-      background: #f4f4f4;
-      padding: 4px 8px;
-      border-radius: 4px;
-      overflow-x: auto;
-    }
-    pre {
-      padding: 10px;
-    }
-    h1, h2, h3 {
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 5px;
-    }
-    ul {
-      margin-left: 20px;
-    }
-  </style>
-</head>
+
 <body>
 
   <h1>PreReact-Backend</h1>
