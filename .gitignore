@@ -1,2 +1,4 @@
 /.idea/
-/backend/data/savetest/
+/backend/old/savetest/
+/backend/dummy/test.npy
+/backend/dummy/

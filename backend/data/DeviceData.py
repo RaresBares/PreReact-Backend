@@ -1,39 +1,35 @@
 import os
-import pandas as pd
+import h5py
 import json
 from datetime import date
-from tabulate import tabulate
-import yaml as yaml
-from numpy.ma.core import append
 
-from backend.data.Dataset import DataSet
+import numpy as np
+from tabulate import tabulate
+
+from backend.data.sensor_module import Sensor
+from backend.generics.Feature import Feature
+from backend.generics.STFT import STFT
 from backend.utils.SensorType import Sensortype
 from backend.utils.saveable import Saveable
+import backend.utils.windows
 
-# returns array of DataSets of Sensors listed in map.yaml in dir
-def loadSensorsFromYaml(dir):
-    file = os.path.join(dir, "map.yaml")
-    if os.path.exists(file):
-        with (open(file, 'r') as f):
-            map = yaml.load(f, Loader=yaml.FullLoader)
-            sensors : list(DataSet) = []
-            for i in range(0, len(map["sensors"])):
-                sensorInfo = map["sensors"][i]
-                path = os.path.join(dir, sensorInfo[list(sensorInfo.keys())[0]]["file_location"], sensorInfo[list(sensorInfo.keys())[0]]["sensorid"] + "_meas.csv")
-                sensor = DataSet(path)
-                sensor.loadFromFile( info=sensorInfo[list(sensorInfo.keys())[0]], super_info=map["super_info"])
-                sensors.append(sensor)
-            return sensors
-    else:
-        print(f"{file} doesn't exist. Creating it now. ")
-        data = {"sensors": [{"TestSensorID": {"sensorID": "/"}}]}
-        with open(file, 'w') as f:
-            yaml.dump(data, f)
-            print(f"{file} created!")
-        return []
 
 class DeviceData(Saveable):
-    sensors: list[DataSet] = []
+    def __init__(self, sensors : list[Sensor], file_path  : str =""):
+        self.sensors = sensors or []
+        self.file_path = file_path
+
+
+    @classmethod
+    def load_sensors_from_hdf5(self, file_path : str=None):
+        sensors = {}
+        with h5py.File(file_path, "r") as f:
+            for sensorid in f.keys():
+                sensor_group = f[sensorid]
+                sensor = Sensor(hdf5 = sensor_group)
+                sensors[sensorid] = sensor
+        return DeviceData(sensors=sensors, file_path=file_path)
+
 
     def count_sensors(self):
         return len(self.sensors)
@@ -41,73 +37,46 @@ class DeviceData(Saveable):
     def get_sensors(self):
         return self.sensors
 
-    def get_sensor_by_id(self, id: str):
-        for sensor in self.sensors:
-            if sensor.sensorID == id:
-                return sensor
-            else:
-                None
-    def get_sensors_by_type(self, type:Sensortype):
-        result_list = [];
-        for sensor in self.sensors:
-            if(sensor.isType(type)):
-                result_list.append(sensor)
-        return result_list
+    def get_sensor_by_id(self, sensor_id):
+        return next((sensor for sensor in self.sensors if sensor.sensorID == sensor_id), None)
 
-    def getLocation(self):
-        return self.dir
+    def get_sensors_by_type(self, sensor_type):
+        return [sensor for sensor in self.sensors if sensor.isType(sensor_type)]
 
-    def getDate(self):
-        return
-
-    def yamlExists(self):
-        return os.path.exists(os.path.join(dir, "map.yaml"))
-
-    def getYaml(self):
-        if self.yamlExists():
-            with open(os.path.join(dir, "map.yaml")) as f:
-                return yaml.load(f, Loader=yaml.FullLoader)
-        else:
-            return None
-
-    def getInfo(self, info:str):
-        return self.getYaml()[info]
-
-    def __init__(self, sensors: list[DataSet] = None, dir : str = None):
-        self.sensors = sensors if sensors else []
-        self.dir = dir;
-        if(not sensors == [] and os.path.exists(dir)):
-           self.sensors =  loadSensorsFromYaml(dir)
-        else:
-            print("Error! Directory doesn't exist!")
-
-
-
-
-    def save(self, dir: str = dir) -> None:
-        for sensor in self.sensors:
-            sensor.save(dir=dir)
-        print(f"{len(self.sensors)} sensors saved in: {dir}")
+    def save(self, file_path):
+        with h5py.File(file_path, "w") as f:
+            for sensor in self.sensors:
+                self.sensors[sensor].save(f)
 
     def introduce(self):
-
-        data = [];
-
-        for sensor in self.sensors:
-            data.append([sensor.alias, sensor.sensorID, sensor.type, sensor.location])
-
-        headers = ["Alias", "SensorID", "SensorType", "Location"]
-
+        data = [[self.sensors[sensor].alias, self.sensors[sensor].sensorid, self.sensors[sensor].sensortype] for sensor in self.sensors]
+        headers = ["Alias", "SensorID", "SensorType"]
         print(tabulate(data, headers, tablefmt="grid"))
 
-if __name__ == "__main__":
-    device = DeviceData(dir="./measurement")
-    device.introduce()
-    i = 0
-    for sensor in device.sensors:
-        i = i + 1;
-        sensor.stfts[1][1][0] = 2 + 4j;
-        device.save("./savetest");
-        print(f"{i}er Sensor: {sensor.type}")
-        sensor.update_scalars()
-##        print(str([float(round(x.real, 2)) + float(round(x.imag, 2)) * 1j for x in sensor.stfts[1][1]]))
+
+'''
+# Erstelle ein Test-Signal mit 1024 Samples, das jede Viertelsekunde die Frequenz ändert
+fs = 10_000  # Abtastrate
+n = 10_000  # Länge des Signals
+
+t = np.arange(n) / fs
+
+# Vier verschiedene Frequenzen für je 256 Samples
+raw_signal = np.concatenate([
+    np.sin(2 * np.pi * 10 * t[:2500]),
+    np.sin(2 * np.pi * 20 * t[2500:5000]),
+    np.sin(2 * np.pi * 40 * t[5000:7500]),
+    np.sin(2 * np.pi * 80 * t[10_000:])
+])
+
+device = DeviceData.load_sensors_from_hdf5("./save.h5")
+a = STFT(window_type="blackman", window_size=100, hop_size=10, id="blackman", data=device.sensors["sensor001"].get_feature("Raw"));
+a.compute_stft(device.sensors["sensor001"].get_feature("Raw"))
+device.sensors["sensor001"].stfts.append(a)
+
+
+
+device.save("./save2.h5")
+
+print("Proof of Concept erfolgreich abgeschlossen. STFT-Daten gespeichert.")
+'''
