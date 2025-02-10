@@ -2,21 +2,22 @@ import os
 import h5py
 import json
 from datetime import date
+
+import numpy as np
 from tabulate import tabulate
 
 from backend.data.sensor_module import Sensor
 from backend.generics.Feature import Feature
+from backend.generics.STFT import STFT
 from backend.utils.SensorType import Sensortype
 from backend.utils.saveable import Saveable
+import backend.utils.windows
+
 
 class DeviceData(Saveable):
     def __init__(self, sensors : list[Sensor], file_path  : str =""):
         self.sensors = sensors or []
         self.file_path = file_path
-        if os.path.exists(file_path):
-            self.load_sensors_from_hdf5()
-        else:
-            print("HDF5 file does not exist!")
 
 
     @classmethod
@@ -45,7 +46,7 @@ class DeviceData(Saveable):
     def save(self, file_path):
         with h5py.File(file_path, "w") as f:
             for sensor in self.sensors:
-                sensor.save(f)
+                self.sensors[sensor].save(f)
 
     def introduce(self):
         data = [[sensor.alias, sensor.sensorID, sensor.type] for sensor in self.sensors]
@@ -54,18 +55,21 @@ class DeviceData(Saveable):
 
 
 
-sensor1 = Sensor(hdf5=None, sensorID="sensor001", alias="First", sensortype=Sensortype.MICROPHONE, features={
+# Erstelle ein Test-Signal mit 1024 Samples, das jede Viertelsekunde die Frequenz ändert
+fs = 120_000  # Abtastrate
+n = 120_000  # Länge des Signals
 
-    "Raw" : Feature([1,2,3,4,5,6], name="Raw")
+t = np.arange(n) / fs
 
-})
+# Vier verschiedene Frequenzen für je 256 Samples
+raw_signal = np.concatenate([
+    np.sin(2 * np.pi * 10 * t[:30000]),
+    np.sin(2 * np.pi * 20 * t[30000:60000]),
+    np.sin(2 * np.pi * 40 * t[60000:90000]),
+    np.sin(2 * np.pi * 80 * t[90000:])
+])
 
-sensor2 = Sensor(hdf5=None, sensorID="sensor002", alias="First", sensortype=Sensortype.MICROPHONE, features={
+device = DeviceData.load_sensors_from_hdf5("./save.h5")
+device.save("./save2.h5")
 
-    "Raw" : Feature([1,2,3,4,5,6], name="Raw"),
-    "FFT" : Feature([1,0,1,0,1,0,2,9], name="FFT")
-
-})
-
-device = DeviceData([sensor1,sensor2])
-device.save("./save.h5")
+print("Proof of Concept erfolgreich abgeschlossen. STFT-Daten gespeichert.")
