@@ -7,16 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: Working integration of file system">
-      <change afterPath="$PROJECT_DIR$/backend/utils/WeightingFunctions.py" afterDir="false" />
+    <list default="true" id="e3142fd7-b0f2-4341-8c1e-5a3c0de743c9" name="Changes" comment="Edited: implementing Dynamic Architecture">
+      <change afterPath="$PROJECT_DIR$/backend/data/sensor_module.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/old/measurement/sensor002_meas.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/console.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/data/Dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/Dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/Dataset.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/DeviceData.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/DeviceData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/generics/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/scalar_feature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/generics/Method.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/vector_feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/measurement/template_map.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/old/measurement/template_map.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/generics/scalar_feature.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/generics/vector_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/generics/Feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/utils/STFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/STFT.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="CSV-Try" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -70,7 +78,7 @@
     "Python.subscript_std_deviation.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "HD5-Integration",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat",
     "node.js.detected.package.eslint": "true",
@@ -79,7 +87,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "aDefault",
-    "settings.editor.selected.configurable": "RainbowCSV.Settings",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -88,35 +96,13 @@
       <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\data\dat" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\old" />
       <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\generics" />
       <recent name="C:\Users\rares\PycharmProjects\PreReact-Backend\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.console">
+  <component name="RunManager" selected="Python.DeviceData">
     <configuration name="fff | GET request to example server" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/models/fff.http" requestIdentifier="GET request to example server" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="Dataset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PreReact-Backend" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/data" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/data/Dataset.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="DeviceData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -164,6 +150,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sensor_module" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PreReact-Backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\data\sensor_module.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="subscript_std_deviation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,16 +199,16 @@
     <list>
       <item itemvalue="Python.FileSystem" />
       <item itemvalue="Python.console" />
-      <item itemvalue="Python.Dataset" />
+      <item itemvalue="Python.sensor_module" />
       <item itemvalue="Python.DeviceData" />
       <item itemvalue="Python.subscript_std_deviation" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.console" />
         <item itemvalue="Python.DeviceData" />
-        <item itemvalue="Python.Dataset" />
         <item itemvalue="Python.subscript_std_deviation" />
+        <item itemvalue="Python.sensor_module" />
+        <item itemvalue="Python.console" />
       </list>
     </recent_temporary>
   </component>
@@ -266,17 +275,37 @@
       <option name="project" value="LOCAL" />
       <updated>1739094888405</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Edited: implementing Dynamic Architecture">
+      <option name="closed" value="true" />
+      <created>1739133560763</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739133560763</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added: DataSet, Saveable, SensorTypes" />
     <MESSAGE value="Edited: Numpy integration" />
     <MESSAGE value="Edited: Working integration of file system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited: Working integration of file system" />
+    <MESSAGE value="Edited: implementing Dynamic Architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited: implementing Dynamic Architecture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

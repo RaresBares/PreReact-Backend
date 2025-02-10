@@ -4,36 +4,42 @@ from enum import Enum
 from backend.utils.WeightingFunctions import WeightingFunctions
 
 
-class VectorFeature(np.ndarray):
-    def __new__(cls, values, name="", crest_factor=None, peak_to_peak=None, rms=None, energy=None, std_dev=None):
+class Feature(np.ndarray):
+    def __new__(cls, values, name="", crest_factor=None, peak_to_peak=None, rms=None, energy=None, std_dev=None, peak=tuple()):
         if not name:
             raise ValueError("Name of VectorFeature cannot be empty")
 
-        obj = np.asarray(values, dtype=np.complex256).view(cls)
+        obj = np.asarray(values, dtype=np.complex128).view(cls)
         obj._name = name
         obj._crest_factor = crest_factor
         obj._peak_to_peak = peak_to_peak
         obj._rms = rms
+        obj._peak = peak
         obj._energy = energy
         obj._std_dev = std_dev
         return obj
 
     def __str__(self):
         return json.dumps({
-            "values": self.tolist(),
+            "values": [[float(v.real), float(v.imag)] for v in self.tolist()],
+            "type": "vector",
             "name": self._name,
-            "crest_factor": self.crest_factor,
-            "peak_to_peak": self.peak_to_peak,
-            "rms": self.rms,
-            "energy": self.energy,
-            "std_dev": self.std_dev
+            "crest_factor": [float(self.crest_factor.real), float(self.crest_factor.imag)] if self.crest_factor is not None else "",
+            "peak_to_peak": [float(self.peak_to_peak.real), float(self.peak_to_peak.imag)] if self.peak_to_peak is not None else "",
+            "rms": [float(self.rms.real), float(self.rms.imag)] if self.rms is not None else "",
+            "energy": [float(self.energy.real), float(self.energy.imag)] if self.energy is not None else "",
+            "std_dev": [float(self.std_dev.real), float(self.std_dev.imag)] if self.std_dev is not None else ""
         })
 
     @classmethod
     def from_string(cls, string):
         data = json.loads(string)
-        return cls(data["values"], data["name"], data.get("crest_factor"), data.get("peak_to_peak"), data.get("rms"),
-                   data.get("energy"), data.get("std_dev"))
+        return cls([np.complex128(complex(v[0], v[1])) for v in data["values"]], data["name"],
+                   np.complex128(complex(*data["crest_factor"])) if data.get("crest_factor") else None,
+                   np.complex128(complex(*data["peak_to_peak"])) if data.get("peak_to_peak") else None,
+                   np.complex128(complex(*data["rms"])) if data.get("rms") else None,
+                   np.complex128(complex(*data["energy"])) if data.get("energy") else None,
+                   np.complex128(complex(*data["std_dev"])) if data.get("std_dev") else None)
 
     @property
     def name(self):
@@ -54,6 +60,14 @@ class VectorFeature(np.ndarray):
     @peak_to_peak.setter
     def peak_to_peak(self, value):
         self._peak_to_peak = value
+
+    @property
+    def peak(self):
+        return self._peak if self._peak is not None else (np.min(self), np.max(self))
+
+    @peak_to_peak.setter
+    def peak_to_peak(self, value):
+        self._peak = value
 
     @property
     def rms(self):
@@ -80,7 +94,6 @@ class VectorFeature(np.ndarray):
         self._std_dev = value
 
     def get_exact_value(self, index, weighting_function=None):
-
         if weighting_function is None:
             return self[index]
 
@@ -89,15 +102,3 @@ class VectorFeature(np.ndarray):
                 return sum(self[i] * weighting_function(i, index) for i in range(len(self)))
             return self[index]
         raise IndexError("Index out of range")
-
-# Example Usage:
-# vec = VectorFeature([1+2j, 2+3j, 3+4j], name="MyVector", crest_factor=5.0, energy=10.0)
-# print(vec.crest_factor)
-# print(vec.peak_to_peak)
-# print(vec.name)
-# print(vec.energy)
-# print(vec.std_dev)
-# print(vec.get_exact_value(1))
-# print(vec.get_exact_value(1, WeightingFunctions.GAUSSIAN.value(1.0, 1.0)))  # Gaussian weighting
-# str_vec = str(vec)
-# new_vec = VectorFeature.from_string(str_vec)
