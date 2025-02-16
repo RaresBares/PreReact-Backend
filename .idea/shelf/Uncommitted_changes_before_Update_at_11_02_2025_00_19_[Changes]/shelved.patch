@@ -1,0 +1,299 @@
+Index: backend/README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/README.md b/README.md
+rename from backend/README.md
+rename to README.md
+--- a/backend/README.md	(revision 3fad020a6f0404c9269881f6344cf48a8767afd6)
++++ b/README.md	(date 1739229559015)
+@@ -1,49 +1,173 @@
+-# Projektname
++<!DOCTYPE html>
++<html lang="de">
++<head>
++  <meta charset="UTF-8">
++  <title>PreReact-Backend</title>
++  <style>
++    body {
++      font-family: Arial, sans-serif;
++      line-height: 1.6;
++      margin: 20px;
++      max-width: 800px;
++    }
++    pre, code {
++      background: #f4f4f4;
++      padding: 4px 8px;
++      border-radius: 4px;
++      overflow-x: auto;
++    }
++    pre {
++      padding: 10px;
++    }
++    h1, h2, h3 {
++      border-bottom: 1px solid #ccc;
++      padding-bottom: 5px;
++    }
++    ul {
++      margin-left: 20px;
++    }
++  </style>
++</head>
++<body>
+ 
+-<img src="./src/logo.png" alt="PREReact Logo" width="200">
++  <h1>PreReact-Backend</h1>
++  <p><strong>PreReact-Backend</strong> ist ein Python‑basiertes Backend-Projekt zur Verarbeitung und Analyse von Sensordaten. 
++  Es umfasst Module zur Verwaltung von Sensoren, zur Berechnung von Kurzzeit-Fourier-Transformationen (STFT) inklusive zusätzlicher Metriken (wie Energie, Standardabweichung, Peaks, Peak-to-Peak) 
++  und eine interaktive Kommandozeilen-Oberfläche (<code>SensorConsole</code>) zur Datenexploration und -manipulation.</p>
+ 
++  <h2>Features</h2>
++  <ul>
++    <li><strong>Sensorverwaltung</strong>
++      <ul>
++        <li>Laden von Sensordaten aus HDF5-Dateien</li>
++        <li>Speicherung von Sensordaten inklusive Attributen (ID, Alias, Sensortyp, Messzeit, etc.)</li>
++        <li>Verwaltung von Features (z. B. RAW-Signal) und STFT-Objekten</li>
++      </ul>
++    </li>
++    <li><strong>STFT-Berechnung</strong>
++      <ul>
++        <li>Berechnung der STFT für gegebene Sensordaten</li>
++        <li>Zusätzliche Metriken:
++          <ul>
++            <li>Energie</li>
++            <li>Standardabweichung</li>
++            <li>Peak-to-Peak-Wert</li>
++            <li>Zwei höchste Peaks</li>
++          </ul>
++        </li>
++        <li>Flexible Fensterfunktionen (z. B. Hann, rectangular)</li>
++      </ul>
++    </li>
++    <li><strong>Kommandozeilen-Oberfläche (<code>SensorConsole</code>)</strong>
++      <ul>
++        <li>Interaktive Befehle zum Laden, Speichern, Auswählen und Aktualisieren von Sensoren</li>
++        <li>Befehle zum Hinzufügen, Entfernen und Neubewerten (revaluate) einzelner STFTs</li>
++        <li>Ausgabe aller Features und STFTs zur leichteren Überprüfung</li>
++      </ul>
++    </li>
++  </ul>
+ 
+-## Übersicht
+-Dies ist eine kurze Beschreibung des Projekts. Es besteht aus drei Hauptunterprojekten, die zusammenarbeiten, um eine umfassende Lösung für [Problemstellung] zu bieten.
++  <h2>Installation</h2>
++  <h3>Voraussetzungen</h3>
++  <ul>
++    <li>Python 3.8+</li>
++    <li>Abhängigkeiten:
++      <ul>
++        <li><a href="https://numpy.org/">NumPy</a></li>
++        <li><a href="https://www.h5py.org/">h5py</a></li>
++      </ul>
++    </li>
++  </ul>
+ 
+----
++  <h3>Installation über pip</h3>
++  <pre><code>python -m venv venv
++# Auf Linux/MacOS:
++source venv/bin/activate
++# Auf Windows:
++venv\Scripts\activate
+ 
+-## Unterprojekte
++pip install numpy h5py
++</code></pre>
++  <p>Klonen Sie anschließend das Repository:</p>
++  <pre><code>git clone https://github.com/deinBenutzername/PreReact-Backend.git
++cd PreReact-Backend
++</code></pre>
+ 
+-### 1. Unterprojekt 1: Name
+-- **Ziel:** Kurzbeschreibung des Ziels dieses Unterprojekts.
+-- **Features:**
+-  - Feature 1
+-  - Feature 2
+-  - Feature 3
+-- **Technologien:** Verwendete Technologien (z. B. Python, JavaScript, etc.)
+-- **Status:** [In Entwicklung/Fertiggestellt]
++  <h2>Projektstruktur</h2>
++  <pre><code>PreReact-Backend/
++├── backend/
++│   ├── console.py             # Kommandozeilen-Oberfläche (SensorConsole)
++│   ├── data/
++│   │   ├── DeviceData.py      # Laden und Speichern von Sensoren (HDF5)
++│   │   └── sensor_module.py   # Sensor-Klasse inkl. STFT-Verwaltung
++│   ├── generics/
++│   │   ├── Feature.py         # Feature-Klasse (z. B. RAW-Signal)
++│   │   └── STFT.py            # STFT-Klasse inkl. Berechnungen und Metriken
++│   └── utils/
++│       ├── SensorType.py      # Definitionen und Hilfsfunktionen für Sensortypen
++│       ├── windows.py         # Erzeugung von Fensterfunktionen (Hann, rectangular, ...)
++│       └── saveable.py        # Basis-Klasse für speicherbare Objekte
++├── README.md                  # Dieses README (alternativ als HTML)
++└── requirements.txt           # Liste der Python-Abhängigkeiten (optional)
++</code></pre>
+ 
+----
++  <h2>Nutzung</h2>
++  <h3>SensorConsole starten</h3>
++  <pre><code>python backend/console.py
++</code></pre>
++  <p>Nach dem Start erscheint die Eingabeaufforderung <code>&gt;&gt;&gt;</code>. Zu den verfügbaren Befehlen gehören:</p>
++  <ul>
++    <li><strong>load &lt;directory&gt;</strong>: Lädt Sensordaten aus einem angegebenen Verzeichnis (HDF5-Dateien).</li>
++    <li><strong>select &lt;sensor_id&gt;</strong>: Wählt einen Sensor anhand seiner ID aus.</li>
++    <li><strong>list_features</strong>: Zeigt alle verfügbaren Features des ausgewählten Sensors an.</li>
++    <li><strong>list_stfts</strong>: Zeigt alle STFTs des ausgewählten Sensors an.</li>
++    <li><strong>add_stft &lt;stft_id&gt; &lt;window_size&gt; &lt;window_type&gt; &lt;hop_size&gt;</strong>: Fügt einen neuen STFT hinzu, sofern die ID noch nicht vergeben wurde. Der STFT wird automatisch berechnet, wenn das RAW-Signal vorhanden ist.</li>
++    <li><strong>remove_stft &lt;stft_id&gt;</strong>: Entfernt einen STFT anhand seiner ID.</li>
++    <li><strong>revaluate_stft &lt;stft_id&gt;</strong>: Berechnet einen bestimmten STFT neu.</li>
++    <li><strong>revaluate_all</strong>: Berechnet alle STFTs des Sensors neu.</li>
++    <li><strong>save &lt;directory&gt;</strong>: Speichert alle Sensordaten (inkl. Features und STFTs) in einem angegebenen Verzeichnis (als HDF5).</li>
++    <li><strong>exit</strong>: Beendet die Konsole.</li>
++  </ul>
+ 
+-### 2. Unterprojekt 2: Name
+-- **Ziel:** Kurzbeschreibung des Ziels dieses Unterprojekts.
+-- **Features:**
+-  - Feature 1
+-  - Feature 2
+-  - Feature 3
+-- **Technologien:** Verwendete Technologien (z. B. C++, React, etc.)
+-- **Status:** [In Entwicklung/Fertiggestellt]
++  <h3>Beispiel</h3>
++  <ol>
++    <li>
++      <strong>Laden der Sensordaten:</strong>
++      <pre><code>&gt;&gt;&gt; load data/save.h5
++1 sensors loaded!
++</code></pre>
++    </li>
++    <li>
++      <strong>Sensor auswählen:</strong>
++      <pre><code>&gt;&gt;&gt; select sensor001
++Sensor sensor001 selected. Available commands: getValue, setValue, list_features, list_stfts, add_stft, remove_stft, revaluate_stft, revaluate_all, print_sensor.
++</code></pre>
++    </li>
++    <li>
++      <strong>Einen neuen STFT hinzufügen:</strong>
++      <pre><code>&gt;&gt;&gt; add_stft stft127 5096 rectangular 10
++STFT stft127 added and computed with window_size=5096, window_type='rectangular', hop_size=10.
++</code></pre>
++    </li>
++    <li>
++      <strong>Daten speichern:</strong>
++      <pre><code>&gt;&gt;&gt; save data/save4.h5
++Data saved to data/save4.h5.
++</code></pre>
++    </li>
++  </ol>
+ 
+----
++  <h2>Entwicklung</h2>
++  <p>Falls Du zum Projekt beitragen möchtest:</p>
++  <ol>
++    <li>Forke das Repository.</li>
++    <li>Erstelle einen neuen Branch (<code>git checkout -b feature/mein-feature</code>).</li>
++    <li>Mache Deine Änderungen und committe diese.</li>
++    <li>Sende einen Pull-Request.</li>
++  </ol>
+ 
+-### 3. Unterprojekt 3: Name
+-- **Ziel:** Kurzbeschreibung des Ziels dieses Unterprojekts.
+-- **Features:**
+-  - Feature 1
+-  - Feature 2
+-  - Feature 3
+-- **Technologien:** Verwendete Technologien (z. B. Rust, Node.js, etc.)
+-- **Status:** [In Entwicklung/Fertiggestellt]
++  <h2>Lizenz</h2>
++  <p>Dieses Projekt ist unter der <a href="LICENSE">MIT License</a> lizenziert.</p>
+ 
+----
+-
+-## Installation
+-1. Clone das Repository:
+-   ```bash
+-   git clone https://github.com/username/projektname.git
++</body>
++</html>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AnalysisUIOptions\">\r\n    <option name=\"ANALYZE_INJECTED_CODE\" value=\"false\" />\r\n  </component>\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"e3142fd7-b0f2-4341-8c1e-5a3c0de743c9\" name=\"Changes\" comment=\"Edited: Working integration of file system\">\r\n      <change afterPath=\"$PROJECT_DIR$/backend/utils/WeightingFunctions.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/console.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/console.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/data/Dataset.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/data/Dataset.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/data/DeviceData.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/data/DeviceData.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/data/measurement/sensor002_meas.csv\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/data/measurement/template_map.yaml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/data/measurement/template_map.yaml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/generics/Features.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/generics/scalar_feature.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/generics/Method.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/generics/vector_feature.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"HTTP Request\" />\r\n        <option value=\"OpenAPI\" />\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;RaresBares&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/RaresBares/PreReact-Backend.git&quot;,\r\n    &quot;accountId&quot;: &quot;b25284c9-bf55-4eda-8504-77b15fc76223&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2rrv1d8WTRe6Iwwd17d3LT26Cep\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"HTTP Request.fff | GET request to example server.executor\": \"Run\",\r\n    \"Python.Dataset.executor\": \"Run\",\r\n    \"Python.DeviceData.executor\": \"Run\",\r\n    \"Python.FileSystem (1).executor\": \"Run\",\r\n    \"Python.FileSystem.executor\": \"Run\",\r\n    \"Python.Unnamed.executor\": \"Run\",\r\n    \"Python.console.executor\": \"Run\",\r\n    \"Python.subscript_std_deviation.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"run.code.analysis.last.selected.profile\": \"aDefault\",\r\n    \"settings.editor.selected.configurable\": \"RainbowCSV.Settings\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\RaresBares\\PycharmProjects\\PreReact-Backend\\backend\\data\\dat\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\RaresBares\\PycharmProjects\\PreReact-Backend\\backend\\generics\" />\r\n      <recent name=\"C:\\Users\\rares\\PycharmProjects\\PreReact-Backend\\backend\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.console\">\r\n    <configuration name=\"fff | GET request to example server\" type=\"HttpClient.HttpRequestRunConfigurationType\" factoryName=\"HTTP Request\" temporary=\"true\" nameIsGenerated=\"true\" path=\"$PROJECT_DIR$/backend/models/fff.http\" requestIdentifier=\"GET request to example server\" runType=\"Run single request\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Dataset\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"PreReact-Backend\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/backend/data\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/backend/data/Dataset.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"DeviceData\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"PreReact-Backend\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/backend/data\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/backend/data/DeviceData.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"console\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"PreReact-Backend\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/backend\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/backend/console.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"subscript_std_deviation\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/utils\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <module name=\"\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/utils/subscript_std_deviation.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Python.FileSystem\" />\r\n      <item itemvalue=\"Python.console\" />\r\n      <item itemvalue=\"Python.Dataset\" />\r\n      <item itemvalue=\"Python.DeviceData\" />\r\n      <item itemvalue=\"Python.subscript_std_deviation\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.console\" />\r\n        <item itemvalue=\"Python.DeviceData\" />\r\n        <item itemvalue=\"Python.Dataset\" />\r\n        <item itemvalue=\"Python.subscript_std_deviation\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"e3142fd7-b0f2-4341-8c1e-5a3c0de743c9\" name=\"Changes\" comment=\"\" />\r\n      <created>1737329794605</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1737329794605</updated>\r\n      <workItem from=\"1737329795689\" duration=\"2885000\" />\r\n      <workItem from=\"1737503387981\" duration=\"1028000\" />\r\n      <workItem from=\"1737765227805\" duration=\"11000\" />\r\n      <workItem from=\"1738943275921\" duration=\"8053000\" />\r\n      <workItem from=\"1738962780075\" duration=\"7408000\" />\r\n      <workItem from=\"1738975117042\" duration=\"2734000\" />\r\n      <workItem from=\"1739003720160\" duration=\"2268000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Added: DataSet, Saveable, SensorTypes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1738967629889</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1738967629889</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Added: DataSet, Saveable, SensorTypes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1738967657802</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1738967657802</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Added: DataSet, Saveable, SensorTypes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1738972217274</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1738972217274</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Edited: Numpy integration\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1738977868406</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1738977868406</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Edited: Working integration of file system\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1739094888405</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1739094888405</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added: DataSet, Saveable, SensorTypes\" />\r\n    <MESSAGE value=\"Edited: Numpy integration\" />\r\n    <MESSAGE value=\"Edited: Working integration of file system\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Edited: Working integration of file system\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/utils/filesystem/FileSystem.py</url>\r\n          <line>71</line>\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/utils/subscript_std_deviation.py</url>\r\n          <line>24</line>\r\n          <option name=\"timeStamp\" value=\"3\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/PreReact_Backend$DeviceData.coverage\" NAME=\"DeviceData Coverage Results\" MODIFIED=\"1739005671470\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/backend/data\" />\r\n    <SUITE FILE_PATH=\"coverage/PreReact_Backend$Dataset.coverage\" NAME=\"Dataset Coverage Results\" MODIFIED=\"1738971114474\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/backend/data\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 3fad020a6f0404c9269881f6344cf48a8767afd6)
++++ b/.idea/workspace.xml	(date 1739229588065)
+@@ -58,31 +58,31 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "HTTP Request.fff | GET request to example server.executor": "Run",
+-    "Python.Dataset.executor": "Run",
+-    "Python.DeviceData.executor": "Run",
+-    "Python.FileSystem (1).executor": "Run",
+-    "Python.FileSystem.executor": "Run",
+-    "Python.Unnamed.executor": "Run",
+-    "Python.console.executor": "Run",
+-    "Python.subscript_std_deviation.executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "main",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "last_opened_file_path": "C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "run.code.analysis.last.selected.profile": "aDefault",
+-    "settings.editor.selected.configurable": "RainbowCSV.Settings",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;HTTP Request.fff | GET request to example server.executor&quot;: &quot;Run&quot;,
++    &quot;Python.Dataset.executor&quot;: &quot;Run&quot;,
++    &quot;Python.DeviceData.executor&quot;: &quot;Run&quot;,
++    &quot;Python.FileSystem (1).executor&quot;: &quot;Run&quot;,
++    &quot;Python.FileSystem.executor&quot;: &quot;Run&quot;,
++    &quot;Python.Unnamed.executor&quot;: &quot;Run&quot;,
++    &quot;Python.console.executor&quot;: &quot;Run&quot;,
++    &quot;Python.subscript_std_deviation.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/RaresBares/PycharmProjects/PreReact-Backend/backend/data/dat&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;RainbowCSV.Settings&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\RaresBares\PycharmProjects\PreReact-Backend\backend\data\dat" />
+@@ -197,9 +197,9 @@
+     <recent_temporary>
+       <list>
+         <item itemvalue="Python.console" />
++        <item itemvalue="Python.subscript_std_deviation" />
+         <item itemvalue="Python.DeviceData" />
+         <item itemvalue="Python.Dataset" />
+-        <item itemvalue="Python.subscript_std_deviation" />
+       </list>
+     </recent_temporary>
+   </component>

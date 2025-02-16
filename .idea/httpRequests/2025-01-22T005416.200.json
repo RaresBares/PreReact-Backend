@@ -1,0 +1,17 @@
+{
+  "args": {
+    "generated-in": "PyCharm"
+  },
+  "headers": {
+    "Accept": "*/*",
+    "Accept-Encoding": "br, deflate, gzip, x-gzip",
+    "Content-Length": "0",
+    "Host": "examples.http-client.intellij.net",
+    "User-Agent": "IntelliJ HTTP Client/PyCharm 2024.1.4",
+    "X-Forwarded-Host": "examples.http-client.intellij.net",
+    "X-Forwarded-Scheme": "https",
+    "X-Scheme": "https"
+  },
+  "origin": "212.25.19.58",
+  "url": "https://examples.http-client.intellij.net/get?generated-in=PyCharm"
+}

@@ -1,0 +1,10 @@
+GET https://examples.http-client.intellij.net/get?generated-in=PyCharm
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2025-01-22T005416.200.json
+
+###
+
